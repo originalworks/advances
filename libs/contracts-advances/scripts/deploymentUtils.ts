@@ -3,10 +3,10 @@ import { readdir, readFile, writeFile } from 'fs/promises';
 
 export interface IDeployment {
   deployer: string;
-  royaltyLoanTemplate: string;
-  royaltyLoanFactory: string;
-  whitelist: string;
+  royaltyAdvanceTemplate: string;
+  royaltyAdvanceFactory: string;
   paymentToken: string;
+  agreementFactory: string;
 }
 
 export const deploymentsDir = path.resolve(__dirname, '../deployments');
