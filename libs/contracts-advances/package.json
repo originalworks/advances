@@ -55,6 +55,20 @@
         "options": {
           "command": "tsc --noEmit"
         }
+      },
+      "release-contracts": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "npm run release",
+          "cwd": "libs/contracts-advances/packages/contracts"
+        }
+      },
+      "release-typechain": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "npm run release",
+          "cwd": "libs/contracts-advances/packages/typechain"
+        }
       }
     }
   }
