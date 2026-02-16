@@ -84,7 +84,7 @@ export const AdvanceOffersList = () => {
         isExpired: boolean;
       }> = dataGridProps.rows.map((row) => ({
         status: row.status,
-        contract: row.loanContract,
+        contract: row.advanceContract,
         collaterals: row.collaterals,
         isExpired: Number(row.expirationDate * 1000) < Date.now(),
       }));

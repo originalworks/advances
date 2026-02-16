@@ -92,7 +92,7 @@ export const TRANSACTIONS_LIST_QUERY = gql`
       orderDirection: $orderDirection
     ) {
       id
-      loanContract {
+      advanceContract {
         id
       }
       collaterals {

@@ -12,10 +12,6 @@ export default defineConfig({
       name: 'ERC20',
     },
     {
-      abi: require('./src/abis/RoyaltyLoan.json'),
-      name: 'RoyaltyLoan',
-    },
-    {
       abi: require('./src/abis/RoyaltyAdvance.json'),
       name: 'RoyaltyAdvance',
     },
