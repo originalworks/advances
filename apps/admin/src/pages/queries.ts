@@ -10,29 +10,31 @@ export const STATISTICS_QUERY = gql`
   }
 `;
 
-export const LOAN_OFFERS_LIST_QUERY = gql`
-  query LoanOffersList(
+export const ADVANCE_OFFERS_LIST_QUERY = gql`
+  query AdvanceOffersList(
     $first: Int
     $skip: Int
-    $orderBy: LoanContract_orderBy
+    $orderBy: AdvanceContract_orderBy
     $orderDirection: OrderDirection
   ) {
-    loanContracts(
+    advanceContracts(
       first: $first
       skip: $skip
       orderBy: $orderBy
       orderDirection: $orderDirection
     ) {
       id
-      loanContract
-      borrower
-      isPackLoan
+      advanceContract
+      creator
+      recipient
+      collateralReceiver
+      isPackAdvance
       collaterals {
         tokenAddress
         tokenId
         tokenAmount
       }
-      loanAmount
+      advanceAmount
       feePpm
       status
       timestamp
@@ -46,19 +48,21 @@ export const LOAN_OFFERS_LIST_QUERY = gql`
   }
 `;
 
-export const LOAN_OFFER_SHOW_QUERY = gql`
-  query LoanOffer($id: ID!) {
-    loanContract(id: $id) {
+export const ADVANCE_OFFER_SHOW_QUERY = gql`
+  query AdvanceOffer($id: ID!) {
+    advanceContract(id: $id) {
       id
-      loanContract
-      borrower
-      isPackLoan
+      advanceContract
+      creator
+      recipient
+      collateralReceiver
+      isPackAdvance
       collaterals {
         tokenAddress
         tokenId
         tokenAmount
       }
-      loanAmount
+      advanceAmount
       feePpm
       status
       timestamp

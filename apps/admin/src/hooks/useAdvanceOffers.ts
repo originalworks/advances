@@ -10,10 +10,10 @@ import { MaxUint256 } from 'ethers';
 import { useNavigate } from 'react-router';
 import { useConfig, useAccount } from 'wagmi';
 
-import { erc20Abi, royaltyLoanAbi } from '../generated/smart-contracts';
+import { erc20Abi, royaltyAdvanceAbi } from '../generated/smart-contracts';
 import { useCanPerformBatchTransactions } from './useCanPerformBatchTransactions';
 
-export const useLoanOffers = () => {
+export const useAdvanceOffers = () => {
   const [isLoading, setIsLoading] = useState<string>();
   const navigate = useNavigate();
   const config = useConfig();
@@ -22,15 +22,15 @@ export const useLoanOffers = () => {
 
   return {
     isLoading,
-    processRepaymentFn: async (loanContract: `0x${string}`) => {
+    processRepaymentFn: async (advanceContract: `0x${string}`) => {
       if (!address) return;
       try {
-        setIsLoading(loanContract);
+        setIsLoading(advanceContract);
 
         const paymentToken = await readContract(config, {
           chainId,
-          abi: royaltyLoanAbi,
-          address: loanContract,
+          abi: royaltyAdvanceAbi,
+          address: advanceContract,
           functionName: 'paymentToken',
           args: [],
         });
@@ -41,14 +41,14 @@ export const useLoanOffers = () => {
           abi: erc20Abi,
           address: paymentToken,
           functionName: 'balanceOf',
-          args: [loanContract],
+          args: [advanceContract],
         });
 
         if (amount > 0) {
           const hash = await writeContract(config, {
             chainId,
-            abi: royaltyLoanAbi,
-            address: loanContract,
+            abi: royaltyAdvanceAbi,
+            address: advanceContract,
             functionName: 'processRepayment',
             args: [],
           });
@@ -66,16 +66,16 @@ export const useLoanOffers = () => {
         console.error(error);
       }
     },
-    provideLoanFn: async (loanContract: `0x${string}`) => {
+    provideAdvanceFn: async (advanceContract: `0x${string}`) => {
       if (!address) return;
 
       try {
-        setIsLoading(loanContract);
+        setIsLoading(advanceContract);
 
         const paymentToken = await readContract(config, {
           chainId,
-          abi: royaltyLoanAbi,
-          address: loanContract,
+          abi: royaltyAdvanceAbi,
+          address: advanceContract,
           functionName: 'paymentToken',
           args: [],
         });
@@ -89,12 +89,12 @@ export const useLoanOffers = () => {
                 abi: erc20Abi,
                 to: paymentToken,
                 functionName: 'approve',
-                args: [loanContract, MaxUint256],
+                args: [advanceContract, MaxUint256],
               },
               {
-                abi: royaltyLoanAbi,
-                to: loanContract,
-                functionName: 'provideLoan',
+                abi: royaltyAdvanceAbi,
+                to: advanceContract,
+                functionName: 'provideAdvance',
                 args: [],
               },
             ],
@@ -113,7 +113,7 @@ export const useLoanOffers = () => {
             abi: erc20Abi,
             address: paymentToken,
             functionName: 'approve',
-            args: [loanContract, MaxUint256],
+            args: [advanceContract, MaxUint256],
           });
 
           const { status: approveStatus } = await waitForTransactionReceipt(
@@ -127,9 +127,9 @@ export const useLoanOffers = () => {
 
           const hash = await writeContract(config, {
             chainId,
-            abi: royaltyLoanAbi,
-            address: loanContract,
-            functionName: 'provideLoan',
+            abi: royaltyAdvanceAbi,
+            address: advanceContract,
+            functionName: 'provideAdvance',
             args: [],
           });
 

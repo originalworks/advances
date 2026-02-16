@@ -16,18 +16,19 @@ import { DataGrid, type GridColDef } from '@mui/x-data-grid';
 
 import {
   erc20Abi,
-  royaltyLoanAbi,
+  royaltyAdvanceAbi,
   agreementErc1155Abi,
 } from '../../generated/smart-contracts';
-import { useLoanOffers, useDataProvider } from '../../hooks';
+import { useDataProvider, useAdvanceOffers } from '../../hooks';
 import { ConnectButton, CustomColumnMenu } from '../../components';
+// TODO: update when deployed new contracts and subgraphs
 import {
   LoanContractCollateral,
   LoanStatus,
 } from '../../generated/graphql/schema.types';
-import { LOAN_OFFERS_LIST_QUERY, STATISTICS_QUERY } from '../queries';
+import { ADVANCE_OFFERS_LIST_QUERY, STATISTICS_QUERY } from '../queries';
 
-export const LoanOffersList = () => {
+export const AdvanceOffersList = () => {
   const config = useConfig();
   const chainId = useChainId();
   const { isConnected } = useAccount();
@@ -45,7 +46,8 @@ export const LoanOffersList = () => {
   const [pageSize, setPageSize] = useState<number>(10);
 
   const dataProvider = useDataProvider();
-  const { isLoading, provideLoanFn, processRepaymentFn } = useLoanOffers();
+  const { isLoading, provideAdvanceFn, processRepaymentFn } =
+    useAdvanceOffers();
 
   const { data } = useOne({
     id: 'status',
@@ -60,9 +62,9 @@ export const LoanOffersList = () => {
     filters: {
       mode: 'off',
     },
-    resource: 'loanContracts',
+    resource: 'advanceContracts',
     meta: {
-      gqlQuery: LOAN_OFFERS_LIST_QUERY,
+      gqlQuery: ADVANCE_OFFERS_LIST_QUERY,
       gqlVariables: {
         first: pageSize,
         skip: page * pageSize,
@@ -99,11 +101,12 @@ export const LoanOffersList = () => {
           } else {
             const data = await readContract(config, {
               address: contract,
-              abi: royaltyLoanAbi,
-              functionName: 'loanActive',
+              abi: royaltyAdvanceAbi,
+              functionName: 'advanceState',
             });
+            const isActive = data === 3;
             const paymentToken = await readContract(config, {
-              abi: royaltyLoanAbi,
+              abi: royaltyAdvanceAbi,
               address: contract,
               functionName: 'paymentToken',
               args: [],
@@ -111,7 +114,7 @@ export const LoanOffersList = () => {
             if (!paymentToken)
               setResults((prevState) => [
                 ...prevState,
-                { contract, active: data, canRepay: false, isExpired },
+                { contract, active: isActive, canRepay: false, isExpired },
               ]);
             else {
               const amount = await readContract(config, {
@@ -123,7 +126,7 @@ export const LoanOffersList = () => {
               if (amount > 0)
                 setResults((prevState) => [
                   ...prevState,
-                  { contract, active: data, canRepay: true, isExpired },
+                  { contract, active: isActive, canRepay: true, isExpired },
                 ]);
               else {
                 const results = await Promise.all(
@@ -141,12 +144,12 @@ export const LoanOffersList = () => {
                 if (totalAmount > 0)
                   setResults((prevState) => [
                     ...prevState,
-                    { contract, active: data, canRepay: true, isExpired },
+                    { contract, active: isActive, canRepay: true, isExpired },
                   ]);
                 else
                   setResults((prevState) => [
                     ...prevState,
-                    { contract, active: data, canRepay: false, isExpired },
+                    { contract, active: isActive, canRepay: false, isExpired },
                   ]);
               }
             }
@@ -186,7 +189,7 @@ export const LoanOffersList = () => {
         },
       },
       {
-        field: 'loanContract',
+        field: 'advanceContract',
         headerName: 'Contract Address',
         type: 'string',
         minWidth: 350,
@@ -230,8 +233,28 @@ export const LoanOffersList = () => {
         },
       },
       {
-        field: 'borrower',
-        headerName: 'Borrower',
+        field: 'creator',
+        headerName: 'Creator',
+        type: 'string',
+        minWidth: 350,
+        display: 'flex',
+        flex: 1,
+        align: 'left',
+        headerAlign: 'left',
+      },
+      {
+        field: 'recipient',
+        headerName: 'Recipient',
+        type: 'string',
+        minWidth: 350,
+        display: 'flex',
+        flex: 1,
+        align: 'left',
+        headerAlign: 'left',
+      },
+      {
+        field: 'collateralReceiver',
+        headerName: 'Collateral Receiver',
         type: 'string',
         minWidth: 350,
         display: 'flex',
@@ -273,8 +296,8 @@ export const LoanOffersList = () => {
         },
       },
       {
-        field: 'loanAmount',
-        headerName: 'Loan Amount',
+        field: 'advanceAmount',
+        headerName: 'Advance Amount',
         type: 'number',
         minWidth: 120,
         display: 'flex',
@@ -303,7 +326,7 @@ export const LoanOffersList = () => {
         disableColumnMenu: true,
         renderCell: function render({ value, row }) {
           const result = results.find(
-            ({ contract }) => contract === row.loanContract,
+            ({ contract }) => contract === row.advanceContract,
           );
           if (value === 'Active' || result?.active) {
             return <TextField value="Active" />;
@@ -390,7 +413,7 @@ export const LoanOffersList = () => {
         disableColumnMenu: true,
         renderCell: function render({ row }) {
           const result = results.find(
-            ({ contract }) => contract === row.loanContract,
+            ({ contract }) => contract === row.advanceContract,
           );
           return (
             <>
@@ -401,8 +424,8 @@ export const LoanOffersList = () => {
                   <Button
                     size="large"
                     variant="contained"
-                    loading={isLoading === row.loanContract}
-                    onClick={() => processRepaymentFn(row.loanContract)}
+                    loading={isLoading === row.advanceContract}
+                    onClick={() => processRepaymentFn(row.advanceContract)}
                   >
                     Process Repayment
                   </Button>
@@ -417,10 +440,10 @@ export const LoanOffersList = () => {
                   <Button
                     size="large"
                     variant="contained"
-                    loading={isLoading === row.loanContract}
-                    onClick={() => provideLoanFn(row.loanContract)}
+                    loading={isLoading === row.advanceContract}
+                    onClick={() => provideAdvanceFn(row.advanceContract)}
                   >
-                    Provide Loan
+                    Provide Advance
                   </Button>
                 ) : (
                   <ConnectButton />

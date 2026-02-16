@@ -43,8 +43,8 @@ import { Login } from './pages/login';
 import { Header } from './components';
 import { AppIcon } from './components/app-icon';
 import { ColorModeContextProvider } from './contexts/color-mode';
-import { LoanOfferShow, LoanOffersList } from './pages/loan-offers';
 import { TransactionShow, TransactionsList } from './pages/transactions';
+import { AdvanceOfferShow, AdvanceOffersList } from './pages/advance-offers';
 
 const gqlBaseClient = new Client({
   url: BASE_SUBGRAPH_URL,
@@ -174,9 +174,9 @@ function App() {
                     },
                   },
                   {
-                    name: 'loan-offers',
-                    list: '/loan-offers',
-                    show: '/loan-offers/show/:id',
+                    name: 'advance-offers',
+                    list: '/advance-offers',
+                    show: '/advance-offers/show/:id',
                   },
                   {
                     name: 'transactions',
@@ -215,9 +215,9 @@ function App() {
                       <Route path="edit/:id" element={<AdvanceTermEdit />} />
                       <Route path="show/:id" element={<AdvanceTermsShow />} />
                     </Route>
-                    <Route path="/loan-offers">
-                      <Route index element={<LoanOffersList />} />
-                      <Route path="show/:id" element={<LoanOfferShow />} />
+                    <Route path="/advance-offers">
+                      <Route index element={<AdvanceOffersList />} />
+                      <Route path="show/:id" element={<AdvanceOfferShow />} />
                     </Route>
                     <Route path="/transactions">
                       <Route index element={<TransactionsList />} />

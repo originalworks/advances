@@ -10,9 +10,9 @@ import { Stack, Typography } from '@mui/material';
 import { useShow, useParsed } from '@refinedev/core';
 
 import { useDataProvider } from '../../hooks';
-import { LOAN_OFFER_SHOW_QUERY } from '../queries';
+import { ADVANCE_OFFER_SHOW_QUERY } from '../queries';
 
-export const LoanOfferShow = () => {
+export const AdvanceOfferShow = () => {
   const { id } = useParsed();
   const chainId = useChainId();
   const chains = useChains();
@@ -20,9 +20,9 @@ export const LoanOfferShow = () => {
 
   const { query } = useShow({
     id,
-    resource: 'loanContract',
+    resource: 'advanceContract',
     meta: {
-      gqlQuery: LOAN_OFFER_SHOW_QUERY,
+      gqlQuery: ADVANCE_OFFER_SHOW_QUERY,
     },
     dataProviderName: dataProvider,
   });
@@ -75,7 +75,7 @@ export const LoanOfferShow = () => {
         <Typography variant="body1" fontWeight="bold">
           Contract Address
         </Typography>
-        <TextField value={record?.loanContract} />
+        <TextField value={record?.advanceContract} />
 
         <Typography variant="body1" fontWeight="bold">
           Collateral Tokens
@@ -89,9 +89,19 @@ export const LoanOfferShow = () => {
           ))}
 
         <Typography variant="body1" fontWeight="bold">
-          Borrower
+          Creator
         </Typography>
-        <TextField value={record?.borrower} />
+        <TextField value={record?.creator} />
+
+        <Typography variant="body1" fontWeight="bold">
+          Recipient
+        </Typography>
+        <TextField value={record?.recipient} />
+
+        <Typography variant="body1" fontWeight="bold">
+          Collateral Receiver
+        </Typography>
+        <TextField value={record?.collateralReceiver} />
 
         <Typography variant="body1" fontWeight="bold">
           Collateral Amounts
@@ -105,9 +115,9 @@ export const LoanOfferShow = () => {
           ))}
 
         <Typography variant="body1" fontWeight="bold">
-          Loan Amount
+          Advance Amount
         </Typography>
-        <TextField value={record?.loanAmount} />
+        <TextField value={record?.advanceAmount} />
 
         <Typography variant="body1" fontWeight="bold">
           Fee Ppm (1% = 10000)
