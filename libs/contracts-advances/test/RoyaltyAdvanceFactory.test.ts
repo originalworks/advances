@@ -13,7 +13,7 @@ import {
 import { fixture, RoyaltyAdvanceFactoryError } from './fixture';
 import { SignerWithAddress } from '@nomicfoundation/hardhat-ethers/signers';
 import { deployProxy } from '@advances/contracts-shared';
-import { deployInitialSetup } from '@advances/contracts-agreements';
+import { deployInitialSetup } from '@originalworks/agreements-hardhat';
 import { ZeroAddress } from 'ethers';
 import { deployAgreementERC1155Creator } from './utils';
 

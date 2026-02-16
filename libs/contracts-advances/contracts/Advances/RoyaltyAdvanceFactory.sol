@@ -8,7 +8,7 @@ import '@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol
 import '@openzeppelin/contracts/utils/introspection/ERC165Checker.sol';
 import '@openzeppelin/contracts/interfaces/IERC1155.sol';
 import '@openzeppelin/contracts/proxy/Clones.sol';
-import '@advances/contracts-agreements/contracts/interfaces/IAgreementFactory.sol';
+import '@originalworks/agreements-contracts/interfaces/IAgreementFactory.sol';
 import './interfaces/IRoyaltyAdvance.sol';
 
 contract RoyaltyAdvanceFactory is

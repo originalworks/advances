@@ -11,7 +11,7 @@ import {
 } from '../typechain';
 import { ICollateral } from '../typechain/contracts/Advances/RoyaltyAdvance';
 import { defaults, HolderStruct } from './fixture';
-import { getEvent } from '@advances/contracts-agreements';
+import { getEvent } from '@originalworks/agreements-hardhat';
 
 export const createAdvanceCreator = (args: {
   advanceFactory: RoyaltyAdvanceFactory;
