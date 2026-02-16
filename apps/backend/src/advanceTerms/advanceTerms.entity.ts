@@ -12,9 +12,9 @@ export const bigintTransformer = {
   from: (value: string): string => value,
 };
 
-@Entity({ name: 'LoanTerms' })
+@Entity({ name: 'AdvanceTerms' })
 @Unique('collateralTokenAddress_chainId', ['collateralTokenAddress', 'chainId'])
-export class LoanTerm {
+export class AdvanceTerm {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -25,7 +25,7 @@ export class LoanTerm {
   feePercentagePpm: string;
 
   @Column({ type: 'bigint', nullable: false, transformer: bigintTransformer })
-  maxLoanAmount: string;
+  maxAdvanceAmount: string;
 
   @Column('decimal', { precision: 10, scale: 4 })
   ratio: string;

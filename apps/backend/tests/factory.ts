@@ -1,6 +1,6 @@
 import factory from 'factory-girl';
 import { DataSource } from 'typeorm';
-import { LoanTerm } from '../src/loanTerms/loanTerms.entity';
+import { LoanTerm } from '../src/advanceTerms/advanceTerms.entity';
 import { ethers } from 'ethers';
 
 export type Factory = typeof factory;

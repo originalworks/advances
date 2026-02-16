@@ -1,3 +1,3 @@
-import { LoanTerm } from '../loanTerms/loanTerms.entity';
+import { LoanTerm } from '../advanceTerms/advanceTerms.entity';
 
 export const entities = [LoanTerm];

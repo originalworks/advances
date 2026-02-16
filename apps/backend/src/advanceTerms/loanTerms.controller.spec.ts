@@ -16,15 +16,15 @@ import { clearDatabase } from '../../tests/typeorm.utils';
 import { dbConfigs } from '../config/dbConfig';
 import { Auth0Guard } from '../auth/auth.guard';
 import { AuthModule } from '../auth/auth.module';
-import { LoanTerm } from './loanTerms.entity';
-import { LoanTermsModule } from './loanTerms.module';
-import { GetLoanTermsByCollateralAddressesBodyDto } from './loanTerms.dto';
+import { AdvanceTerm } from './advanceTerms.entity';
+import { AdvanceTermsModule } from './advanceTerms.module';
+import { GetAdvanceTermsByCollateralAddressesBodyDto } from './advanceTerms.dto';
 
 describe('AppController', () => {
   let factory: Factory;
   let app: INestApplication;
   let dataSource: DataSource;
-  let loanTermsRepo: Repository<LoanTerm>;
+  let advanceTermsRepo: Repository<AdvanceTerm>;
 
   beforeAll(async () => {
     const guardMock: CanActivate = { canActivate: jest.fn(() => true) };
@@ -32,7 +32,7 @@ describe('AppController', () => {
       imports: [
         ConfigModule.forRoot({ isGlobal: true }),
         TypeOrmModule.forRoot(dbConfigs.test),
-        LoanTermsModule,
+        AdvanceTermsModule,
         AuthModule,
       ],
     })
@@ -42,7 +42,7 @@ describe('AppController', () => {
 
     dataSource = module.get(DataSource);
     factory = getFactory(dataSource);
-    loanTermsRepo = dataSource.getRepository(LoanTerm);
+    advanceTermsRepo = dataSource.getRepository(AdvanceTerm);
     app = module.createNestApplication();
 
     app.useGlobalPipes(
@@ -57,7 +57,7 @@ describe('AppController', () => {
 
   beforeEach(async () => {
     await clearDatabase(dataSource);
-    await factory.createMany<LoanTerm>(LoanTerm.name, 10);
+    await factory.createMany<AdvanceTerm>(AdvanceTerm.name, 10);
   });
 
   afterAll(async () => {
@@ -65,22 +65,22 @@ describe('AppController', () => {
     await app.close();
   });
 
-  describe('Loan Terms Controller', () => {
+  describe('Advance Terms Controller', () => {
     it('GetOne', async () => {
-      await request(app.getHttpServer()).get('/loan-terms/1').expect(200);
+      await request(app.getHttpServer()).get('/advance-terms/1').expect(200);
     });
     it('GetMany', async () => {
-      await request(app.getHttpServer()).get('/loan-terms').expect(200);
+      await request(app.getHttpServer()).get('/advance-terms').expect(200);
     });
     it('CreateOne', async () => {
       const address = '0x388C818cA8b9251b393131C08a736a67ccb19297'; // Mixed Case
       const res = await request(app.getHttpServer())
-        .post('/loan-terms/')
+        .post('/advance-terms/')
         .set('Content-Type', 'application/json')
         .send({
           collateralTokenAddress: address,
           feePercentagePpm: '1000',
-          maxLoanAmount: '1000',
+          maxAdvanceAmount: '1000',
           ratio: '1',
           chainId: '1',
         })
@@ -91,12 +91,12 @@ describe('AppController', () => {
     it('UpdateOne', async () => {
       const address = '0x388C818cA8b9251b393131C08a736a67ccb19297';
       const res = await request(app.getHttpServer())
-        .patch('/loan-terms/1')
+        .patch('/advance-terms/1')
         .set('Content-Type', 'application/json')
         .send({
           collateralTokenAddress: address,
           feePercentagePpm: '1000',
-          maxLoanAmount: '1000',
+          maxAdvanceAmount: '1000',
           ratio: '1',
           chainId: '1',
         })
@@ -105,13 +105,13 @@ describe('AppController', () => {
       expect(res.body.collateralTokenAddress).toEqual(address.toLowerCase());
     });
     it('DeleteOne', async () => {
-      await request(app.getHttpServer()).delete('/loan-terms/1').expect(200);
+      await request(app.getHttpServer()).delete('/advance-terms/1').expect(200);
     });
 
-    it('getLoanTermByCollateralAddress - happy path', async () => {
-      const entry = await loanTermsRepo.findOneBy({ id: 5 });
-      const entryOnDifferentChain = await factory.create<LoanTerm>(
-        LoanTerm.name,
+    it('getAdvanceTermByCollateralAddress - happy path', async () => {
+      const entry = await advanceTermsRepo.findOneBy({ id: 5 });
+      const entryOnDifferentChain = await factory.create<AdvanceTerm>(
+        AdvanceTerm.name,
         {
           collateralTokenAddress: entry?.collateralTokenAddress,
           chainId: '2',
@@ -119,7 +119,7 @@ describe('AppController', () => {
       );
       let res = await request(app.getHttpServer())
         .get(
-          `/loan-terms/collateral/${entry?.collateralTokenAddress.toUpperCase()}/${entry?.chainId}`,
+          `/advance-terms/collateral/${entry?.collateralTokenAddress.toUpperCase()}/${entry?.chainId}`,
         )
         .expect(200);
 
@@ -127,27 +127,27 @@ describe('AppController', () => {
 
       res = await request(app.getHttpServer())
         .get(
-          `/loan-terms/collateral/${entry?.collateralTokenAddress.toUpperCase()}/${entryOnDifferentChain.chainId}`,
+          `/advance-terms/collateral/${entry?.collateralTokenAddress.toUpperCase()}/${entryOnDifferentChain.chainId}`,
         )
         .expect(200);
 
       expect(res.body.id).toEqual(entryOnDifferentChain.id);
     });
 
-    it('getLoanTermByCollateralAddress - catch error', async () => {
+    it('getAdvanceTermByCollateralAddress - catch error', async () => {
       const res = await request(app.getHttpServer())
-        .get(`/loan-terms/collateral/${zeroEthAddress}/2`)
+        .get(`/advance-terms/collateral/${zeroEthAddress}/2`)
         .expect(404);
 
       expect(res.text).toEqual(
-        '{"criteria":{"collateralTokenAddress":"0x0000000000000000000000000000000000000000","chainId":"2"},"message":"Could not find any entity of type \\"LoanTerm\\" matching: {\\n    \\"collateralTokenAddress\\": \\"0x0000000000000000000000000000000000000000\\",\\n    \\"chainId\\": \\"2\\"\\n}"}',
+        '{"criteria":{"collateralTokenAddress":"0x0000000000000000000000000000000000000000","chainId":"2"},"message":"Could not find any entity of type \\"AdvanceTerm\\" matching: {\\n    \\"collateralTokenAddress\\": \\"0x0000000000000000000000000000000000000000\\",\\n    \\"chainId\\": \\"2\\"\\n}"}',
       );
     });
 
-    it('getLoanTermsByCollateralAddresses - happy path - all addresses have loan terms', async () => {
-      const firstEntry = await loanTermsRepo.findOneBy({ id: 1 });
-      const secondEntry = await loanTermsRepo.findOneBy({ id: 2 });
-      const dto: GetLoanTermsByCollateralAddressesBodyDto = {
+    it('getAdvanceTermsByCollateralAddresses - happy path - all addresses have advance terms', async () => {
+      const firstEntry = await advanceTermsRepo.findOneBy({ id: 1 });
+      const secondEntry = await advanceTermsRepo.findOneBy({ id: 2 });
+      const dto: GetAdvanceTermsByCollateralAddressesBodyDto = {
         chainId: '1',
         tokenAddresses: [
           firstEntry?.collateralTokenAddress || '',
@@ -156,7 +156,7 @@ describe('AppController', () => {
       };
 
       const res = await request(app.getHttpServer())
-        .post('/loan-terms/collaterals')
+        .post('/advance-terms/collaterals')
         .send(dto)
         .expect(200);
 
@@ -165,9 +165,9 @@ describe('AppController', () => {
       expect(res.body[1].id).toEqual(2);
     });
 
-    it('getLoanTermsByCollateralAddresses - happy path - only one address has loan terms', async () => {
-      const entry = await loanTermsRepo.findOneBy({ id: 2 });
-      const dto: GetLoanTermsByCollateralAddressesBodyDto = {
+    it('getAdvanceTermsByCollateralAddresses - happy path - only one address has advance terms', async () => {
+      const entry = await advanceTermsRepo.findOneBy({ id: 2 });
+      const dto: GetAdvanceTermsByCollateralAddressesBodyDto = {
         chainId: '1',
         tokenAddresses: [
           randomEthAddress(),
@@ -176,7 +176,7 @@ describe('AppController', () => {
       };
 
       const res = await request(app.getHttpServer())
-        .post('/loan-terms/collaterals')
+        .post('/advance-terms/collaterals')
         .send(dto)
         .expect(200);
 
@@ -184,23 +184,23 @@ describe('AppController', () => {
       expect(res.body[0].id).toEqual(2);
     });
 
-    it('getLoanTermsByCollateralAddresses - none of the addresses have loan terms', async () => {
-      const dto: GetLoanTermsByCollateralAddressesBodyDto = {
+    it('getAdvanceTermsByCollateralAddresses - none of the addresses have advance terms', async () => {
+      const dto: GetAdvanceTermsByCollateralAddressesBodyDto = {
         chainId: '2',
         tokenAddresses: [randomEthAddress(), randomEthAddress()],
       };
 
       const res = await request(app.getHttpServer())
-        .post('/loan-terms/collaterals')
+        .post('/advance-terms/collaterals')
         .send(dto)
         .expect(200);
 
       expect(res.body.length).toEqual(0);
     });
 
-    it('getLoanTermsByCollateralAddresses - catch error - wrong params', async () => {
+    it('getAdvanceTermsByCollateralAddresses - catch error - wrong params', async () => {
       const res = await request(app.getHttpServer())
-        .post('/loan-terms/collaterals')
+        .post('/advance-terms/collaterals')
         .send({})
         .expect(400);
 
