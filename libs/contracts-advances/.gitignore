@@ -1,4 +1,11 @@
 cache
 artifacts
-typechain
+/typechain
 contracts/shared
+packages/contracts/*
+!packages/contracts/package.json
+!packages/contracts/build.sh
+packages/typechain/*
+!packages/typechain/package.json
+!packages/typechain/build.sh
+!packages/typechain/tsconfig.build.json
