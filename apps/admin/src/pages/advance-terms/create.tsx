@@ -1,26 +1,32 @@
-import { useChains } from 'wagmi';
 import { Controller } from 'react-hook-form';
+import { useAccount, useChains } from 'wagmi';
 
-import { Edit } from '@refinedev/mui';
+import { Create } from '@refinedev/mui';
 import { useForm } from '@refinedev/react-hook-form';
 import { Autocomplete, Box, TextField } from '@mui/material';
 
-export const LoanTermEdit = () => {
+export const AdvanceTermCreate = () => {
+  const { isConnected, chainId } = useAccount();
   const chains = useChains();
 
   const {
     control,
     register,
     setValue,
-    getValues,
     formState: { errors },
+    refineCore: { formLoading },
     saveButtonProps,
   } = useForm({});
 
-  const defaultChain = getValues().chainId || chains[0].id.toString();
+  const defaultChain =
+    isConnected &&
+    !!chainId &&
+    chains.findIndex((chain) => chain.id === chainId) >= 0
+      ? chainId.toString()
+      : chains[0].id.toString();
 
   return (
-    <Edit saveButtonProps={saveButtonProps}>
+    <Create isLoading={formLoading} saveButtonProps={saveButtonProps}>
       <Box
         component="form"
         sx={{ display: 'flex', flexDirection: 'column' }}
@@ -105,23 +111,23 @@ export const LoanTermEdit = () => {
         />
 
         <TextField
-          {...register('maxLoanAmount', {
+          {...register('maxAdvanceAmount', {
             required: 'This field is required',
             min: {
               value: 1,
               message: 'Invalid field',
             },
           })}
-          error={!!(errors as any)?.maxLoanAmount}
-          helperText={(errors as any)?.maxLoanAmount?.message}
+          error={!!(errors as any)?.maxAdvanceAmount}
+          helperText={(errors as any)?.maxAdvanceAmount?.message}
           margin="normal"
           fullWidth
           slotProps={{
             inputLabel: { shrink: true },
           }}
           type="number"
-          label={'Max Loan Amount'}
-          name="maxLoanAmount"
+          label={'Max Advance Amount'}
+          name="maxAdvanceAmount"
         />
 
         <TextField
@@ -145,6 +151,6 @@ export const LoanTermEdit = () => {
           name="ratio"
         />
       </Box>
-    </Edit>
+    </Create>
   );
 };
