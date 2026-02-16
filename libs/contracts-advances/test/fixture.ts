@@ -12,7 +12,7 @@ import {
 import {
   deployInitialSetup,
   getEvent,
-} from '@advances/contracts-agreements';
+} from '@originalworks/agreements-hardhat';
 import { deployProxy } from '@advances/contracts-shared';
 
 import { AddressLike, BigNumberish } from 'ethers';
