@@ -115,7 +115,7 @@ export const TRANSACTION_SHOW_QUERY = gql`
   query Transaction($id: ID!) {
     expense(id: $id) {
       id
-      loanContract {
+      advanceContract {
         id
       }
       collaterals {
