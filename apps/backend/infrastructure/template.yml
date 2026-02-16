@@ -46,7 +46,7 @@ Globals:
         AUTH0_AUDIENCE: !Ref Auth0Audience
 
 Resources:
-  RoyaltyLoansRole:
+  AdvancesRole:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -81,7 +81,7 @@ Resources:
   Api:
     Type: AWS::Serverless::Api
     Properties:
-      Name: RoyaltyLoans
+      Name: Advances
       StageName: !Ref Environment
       MethodSettings:
         - ResourcePath: "/*"
@@ -91,8 +91,8 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Tracing: Active
-      CodeUri: ./royalty-loans.zip
-      Handler: out/royalty-loans/lambdaEntrypoint.app
+      CodeUri: ./advances.zip
+      Handler: out/advances/lambdaEntrypoint.app
       MemorySize: 512
       AutoPublishAlias: !Ref AutoPublishAlias
       # ReservedConcurrentExecutions: 1
@@ -107,21 +107,21 @@ Resources:
             RestApiId: !Ref Api
             Path: /{whatever+}
             Method: ANY
-      Role: !GetAtt RoyaltyLoansRole.Arn
+      Role: !GetAtt AdvancesRole.Arn
 
   RunMigrations:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub "CodeDeployHook_RoyaltyLoans-${Environment}-RunMigrations"
-      CodeUri: ./royalty-loans.zip
-      Handler: out/royalty-loans/lambdaEntrypoint.runMigrations
+      FunctionName: !Sub "CodeDeployHook_Advances-${Environment}-RunMigrations"
+      CodeUri: ./advances.zip
+      Handler: out/advances/lambdaEntrypoint.runMigrations
       Environment:
         Variables:
           ROOT_DB_NAME: !Ref RootDbName
           SETTINGS_DEF_MODE: !Ref Environment
       DeploymentPreference:
         Enabled: false
-      Role: !GetAtt RoyaltyLoansRole.Arn
+      Role: !GetAtt AdvancesRole.Arn
 
 Outputs:
   ApiUrl:

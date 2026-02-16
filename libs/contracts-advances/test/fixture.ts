@@ -12,8 +12,8 @@ import {
 import {
   deployInitialSetup,
   getEvent,
-} from '@royalty-loans/contracts-agreements';
-import { deployProxy } from '@royalty-loans/contracts-shared';
+} from '@advances/contracts-agreements';
+import { deployProxy } from '@advances/contracts-shared';
 
 import { AddressLike, BigNumberish } from 'ethers';
 import { ICollateral } from '../typechain/contracts/Advances/interfaces/IRoyaltyAdvance';

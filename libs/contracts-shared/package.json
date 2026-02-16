@@ -1,5 +1,5 @@
 {
-  "name": "@royalty-loans/contracts-shared",
+  "name": "@advances/contracts-shared",
   "version": "0.0.1",
   "private": true,
   "main": "./index.ts",

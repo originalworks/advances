@@ -12,8 +12,8 @@ import {
 } from '../typechain';
 import { fixture, RoyaltyAdvanceFactoryError } from './fixture';
 import { SignerWithAddress } from '@nomicfoundation/hardhat-ethers/signers';
-import { deployProxy } from '@royalty-loans/contracts-shared';
-import { deployInitialSetup } from '@royalty-loans/contracts-agreements';
+import { deployProxy } from '@advances/contracts-shared';
+import { deployInitialSetup } from '@advances/contracts-agreements';
 import { ZeroAddress } from 'ethers';
 import { deployAgreementERC1155Creator } from './utils';
 

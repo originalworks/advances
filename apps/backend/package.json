@@ -1,5 +1,5 @@
 {
-  "name": "@royalty-loans/backend",
+  "name": "@advances/backend",
   "version": "0.0.1",
   "private": true,
   "nx": {
@@ -35,15 +35,15 @@
           "build"
         ],
         "options": {
-          "buildTarget": "@royalty-loans/backend:build",
+          "buildTarget": "@advances/backend:build",
           "runBuildTargetDependencies": false
         },
         "configurations": {
           "development": {
-            "buildTarget": "@royalty-loans/backend:build:development"
+            "buildTarget": "@advances/backend:build:development"
           },
           "production": {
-            "buildTarget": "@royalty-loans/backend:build:production"
+            "buildTarget": "@advances/backend:build:production"
           }
         }
       },

@@ -1,8 +1,8 @@
 {
   "Parameters": {
     "Environment": "prod",
-    "AutoPublishAlias": "ProdRoyaltyLoansBackend",
-    "DBName": "prod-royalty-loans",
+    "AutoPublishAlias": "ProdAdvancesBackend",
+    "DBName": "prod-advances",
     "DbHost": "/ow/stage/db/host",
     "DbSecret": "/ow/stage/db/secret-arn",
     "RootDbName": "/ow/stage/db/name",

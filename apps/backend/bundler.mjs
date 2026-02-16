@@ -8,7 +8,7 @@ await esbuild.build({
   minify: false,
   platform: 'node',
   target: 'node22',
-  outdir: 'infrastructure/out/royalty-loans',
+  outdir: 'infrastructure/out/advances',
   loader: {
     // ensures .node binaries are copied to ./dist
     '.node': 'copy',

@@ -7,7 +7,7 @@ import '@openzeppelin/contracts/interfaces/IERC20.sol';
 import '@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol';
 import '@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol';
 import '@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol';
-import '@royalty-loans/contracts-agreements/contracts/interfaces/IAgreement.sol';
+import '@advances/contracts-agreements/contracts/interfaces/IAgreement.sol';
 import './interfaces/IRoyaltyAdvance.sol';
 
 enum AdvanceState {
