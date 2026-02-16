@@ -8,6 +8,8 @@ out
 royalty-advances.zip
 
 .env
+.npmrc
+
 # dependencies
 node_modules
 
