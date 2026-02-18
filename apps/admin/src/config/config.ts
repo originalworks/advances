@@ -8,4 +8,4 @@ export const BASE_SUBGRAPH_URL = import.meta.env.VITE_BASE_SUBGRAPH_URL;
 export const POLYGON_RPC_URL = import.meta.env.VITE_POLYGON_RPC_URL;
 export const POLYGON_SUBGRAPH_URL = import.meta.env.VITE_POLYGON_SUBGRAPH_URL;
 export const PROD_DOMAIN = import.meta.env.VITE_PROD_DOMAIN;
-export const STAGE_DOMAIN = import.meta.env.VITE_STAGE_DOMAIN;
+export const DEV_DOMAIN = import.meta.env.VITE_DEV_DOMAIN;
