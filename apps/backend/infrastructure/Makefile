@@ -8,11 +8,11 @@ TEMPLATE_FILE=template.yml
 .deploy:
 	sam deploy --template-file $(TEMPLATE_FILE) --stack-name $(STACK_NAME) --capabilities $(CAPABILITIES) --region $(REGION) --s3-bucket $(ARTIFACTS_BUCKET) --s3-prefix $(ENVIRONMENT) --parameter-overrides $(PARAMETERS) --no-fail-on-empty-changeset
 
-deploy-stage: ENVIRONMENT=stage
-deploy-stage: STACK_NAME=stage-advances-backend
-deploy-stage: PARAMETERS_FILE=template-config.stage.json
-deploy-stage: PARAMETERS=$(shell jq -r '.Parameters | to_entries | map("\(.key)=\(.value)") | join(" ")' $(PARAMETERS_FILE))
-deploy-stage: .deploy
+deploy-dev: ENVIRONMENT=dev
+deploy-dev: STACK_NAME=dev-advances-backend
+deploy-dev: PARAMETERS_FILE=template-config.dev.json
+deploy-dev: PARAMETERS=$(shell jq -r '.Parameters | to_entries | map("\(.key)=\(.value)") | join(" ")' $(PARAMETERS_FILE))
+deploy-dev: .deploy
 
 deploy-prod: ENVIRONMENT=prod
 deploy-prod: STACK_NAME=prod-advances-backend

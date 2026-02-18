@@ -1,0 +1,12 @@
+{
+  "Parameters": {
+    "Environment": "dev",
+    "AutoPublishAlias": "DevAdvancesBackend",
+    "DBName": "advances",
+    "DbHost": "/ow/dev/db/host",
+    "DbSecret": "/ow/dev/db/secret-arn",
+    "RootDbName": "/ow/dev/db/name",
+    "Auth0Issuer": "/ow/dev/auth0/issuer",
+    "Auth0Audience": "/ow/dev/auth0/audience"
+  }
+}

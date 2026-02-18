@@ -1,6 +1,6 @@
 import factory from 'factory-girl';
 import { DataSource } from 'typeorm';
-import { LoanTerm } from '../src/loanTerms/loanTerms.entity';
+import { AdvanceTerm } from '../src/advanceTerms/advanceTerms.entity';
 import { ethers } from 'ethers';
 
 export type Factory = typeof factory;
@@ -16,11 +16,11 @@ export const randomEthAddress = () =>
 export const getFactory = (dataSource: DataSource) => {
   if (factoryCached === null) {
     factory.setAdapter(new CustomTypeORMAdapter(dataSource));
-    factory.define('LoanTerm', LoanTerm, {
+    factory.define('AdvanceTerm', AdvanceTerm, {
       id: factory.sequence((n) => n),
       collateralTokenAddress: randomEthAddress,
       feePercentagePpm: '1000',
-      maxLoanAmount: ethers.parseUnits('10', 6).toString(),
+      maxAdvanceAmount: ethers.parseUnits('10', 6).toString(),
       ratio: '1',
       chainId: '1',
       createdAt: new Date('2021-09-01T12:46:25.241Z'),
