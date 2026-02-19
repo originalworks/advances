@@ -122,6 +122,14 @@ Resources:
       DeploymentPreference:
         Enabled: false
       Role: !GetAtt AdvancesRole.Arn
+  
+  BackendUrlParameter:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: !Sub /ow/${Environment}/advances/backend_url
+      Type: String
+      Description: API Gateway endpoint URL of the backend
+      Value: !Sub "https://${Api}.execute-api.${AWS::Region}.amazonaws.com/${Environment}/"
 
 Outputs:
   ApiUrl:
