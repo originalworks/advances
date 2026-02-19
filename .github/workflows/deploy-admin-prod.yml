@@ -13,4 +13,4 @@ jobs:
     with:
       environment: 'prod'
     secrets:
-      IAM_WORKFLOW_ROLE: ${{ secrets.DEV_IAM_WORKFLOW_ROLE }}
+      IAM_WORKFLOW_ROLE: ${{ secrets.PROD_IAM_WORKFLOW_ROLE }}
