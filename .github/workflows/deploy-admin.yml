@@ -48,6 +48,10 @@ jobs:
           BACKEND_URL_PATH="/ow/$ENV/advances/backend_url"
           ADMIN_S3_BUCKET_PATH="/ow/$ENV/admin/bucket-name"
           DISTRIBUTION_ID_PATH="/ow/$ENV/admin/distribution-id"
+          BASE_RPC_URL_PATH="/ow/$ENV/admin/base-rpc-url"
+          BASE_SUBGRAPH_URL_PATH="/ow/$ENV/admin/base-subgraph-url"
+          POLYGON_RPC_URL_PATH="/ow/$ENV/admin/polygon-rpc-url"
+          POLYGON_SUBGRAPH_URL_PATH="/ow/$ENV/admin/polygon-subgraph-url"
 
           # Fetch all parameters in one call
           PARAMS=$(aws ssm get-parameters \
@@ -58,6 +62,10 @@ jobs:
               "$BACKEND_URL_PATH" \
               "$ADMIN_S3_BUCKET_PATH" \
               "$DISTRIBUTION_ID_PATH" \
+              "$BASE_RPC_URL_PATH" \
+              "$BASE_SUBGRAPH_URL_PATH" \
+              "$POLYGON_RPC_URL_PATH" \
+              "$POLYGON_SUBGRAPH_URL_PATH" \
             --with-decryption)
 
           # Extract values using the defined paths
@@ -67,9 +75,13 @@ jobs:
           BACKEND_URL=$(echo "$PARAMS" | jq -r ".Parameters[] | select(.Name==\"$BACKEND_URL_PATH\") | .Value")
           ADMIN_S3_BUCKET=$(echo "$PARAMS" | jq -r ".Parameters[] | select(.Name==\"$ADMIN_S3_BUCKET_PATH\") | .Value")
           DISTRIBUTION_ID=$(echo "$PARAMS" | jq -r ".Parameters[] | select(.Name==\"$DISTRIBUTION_ID_PATH\") | .Value")
+          BASE_RPC_URL=$(echo "$PARAMS" | jq -r ".Parameters[] | select(.Name==\"$BASE_RPC_URL_PATH\") | .Value")
+          BASE_SUBGRAPH_URL=$(echo "$PARAMS" | jq -r ".Parameters[] | select(.Name==\"$BASE_SUBGRAPH_URL_PATH\") | .Value")
+          POLYGON_RPC_URL=$(echo "$PARAMS" | jq -r ".Parameters[] | select(.Name==\"$POLYGON_RPC_URL_PATH\") | .Value")
+          POLYGON_SUBGRAPH_URL=$(echo "$PARAMS" | jq -r ".Parameters[] | select(.Name==\"$POLYGON_SUBGRAPH_URL_PATH\") | .Value")
 
           # Fail fast if any parameter missing
-          for VAR in AUTH0_ISSUER AUTH0_AUDIENCE AUTH0_CLIENT_ID BACKEND_URL ADMIN_S3_BUCKET DISTRIBUTION_ID
+          for VAR in AUTH0_ISSUER AUTH0_AUDIENCE AUTH0_CLIENT_ID BACKEND_URL ADMIN_S3_BUCKET DISTRIBUTION_ID BASE_RPC_URL BASE_SUBGRAPH_URL POLYGON_RPC_URL POLYGON_SUBGRAPH_URL
           do
             if [ -z "${!VAR}" ]; then
               echo "Missing SSM parameter: $VAR"
@@ -84,6 +96,10 @@ jobs:
           echo "BACKEND_URL=$BACKEND_URL" >> $GITHUB_ENV
           echo "ADMIN_S3_BUCKET=$ADMIN_S3_BUCKET" >> $GITHUB_ENV
           echo "DISTRIBUTION_ID=$DISTRIBUTION_ID" >> $GITHUB_ENV
+          echo "BASE_RPC_URL=$BASE_RPC_URL" >> $GITHUB_ENV
+          echo "BASE_SUBGRAPH_URL=$BASE_SUBGRAPH_URL" >> $GITHUB_ENV
+          echo "POLYGON_RPC_URL=$POLYGON_RPC_URL" >> $GITHUB_ENV
+          echo "POLYGON_SUBGRAPH_URL=$POLYGON_SUBGRAPH_URL" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: npm ci
@@ -96,10 +112,10 @@ jobs:
           VITE_AUTH0_AUDIENCE: ${{ env.AUTH0_AUDIENCE }}
           VITE_AUTH0_CLIENT_ID: ${{ env.AUTH0_CLIENT_ID }}
           VITE_BACKEND_URL: ${{ env.BACKEND_URL }}
-          VITE_BASE_RPC_URL: ${{ secrets.VITE_BASE_RPC_URL }}
-          VITE_BASE_SUBGRAPH_URL: ${{ secrets.VITE_BASE_SUBGRAPH_URL }}
-          VITE_POLYGON_RPC_URL: ${{ secrets.VITE_POLYGON_RPC_URL }}
-          VITE_POLYGON_SUBGRAPH_URL: ${{ secrets.VITE_POLYGON_SUBGRAPH_URL }}
+          VITE_BASE_RPC_URL: ${{ env.BASE_RPC_URL }}
+          VITE_BASE_SUBGRAPH_URL: ${{ env.BASE_SUBGRAPH_URL }}
+          VITE_POLYGON_RPC_URL: ${{ env.POLYGON_RPC_URL }}
+          VITE_POLYGON_SUBGRAPH_URL: ${{ env.POLYGON_SUBGRAPH_URL }}
           VITE_PROD_DOMAIN: ${{ secrets.PROD_DOMAIN }}
           VITE_STAGE_DOMAIN: ${{ secrets.STAGE_DOMAIN }}
         run: npx nx run admin:build --no-cloud
