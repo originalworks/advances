@@ -8,7 +8,7 @@ import {
 } from 'class-validator';
 import { Transform } from 'class-transformer';
 
-export class CreateLoanTermsDto {
+export class CreateAdvanceTermsDto {
   @IsNotEmpty()
   @IsString()
   @IsEthereumAddress()
@@ -25,9 +25,9 @@ export class CreateLoanTermsDto {
   @IsNotEmpty()
   @IsString()
   @Matches(/^\d+$/, {
-    message: 'maxLoanAmount must be a string containing only digits',
+    message: 'maxAdvanceAmount must be a string containing only digits',
   })
-  maxLoanAmount: string;
+  maxAdvanceAmount: string;
 
   @IsNotEmpty()
   @IsString()
@@ -43,7 +43,7 @@ export class CreateLoanTermsDto {
   chainId: string;
 }
 
-export class UpdateLoanTermsDto {
+export class UpdateAdvanceTermsDto {
   @IsOptional()
   @IsEthereumAddress()
   @Transform(({ value }) => value.toLowerCase())
@@ -59,9 +59,9 @@ export class UpdateLoanTermsDto {
   @IsOptional()
   @IsString()
   @Matches(/^\d+$/, {
-    message: 'maxLoanAmount must be a string containing only digits',
+    message: 'maxAdvanceAmount must be a string containing only digits',
   })
-  maxLoanAmount?: string;
+  maxAdvanceAmount?: string;
 
   @IsOptional()
   @IsString()
@@ -77,7 +77,7 @@ export class UpdateLoanTermsDto {
   chainId?: string;
 }
 
-export class GetLoanTermByCollateralTokenAddressParamDto {
+export class GetAdvanceTermByCollateralTokenAddressParamDto {
   @IsEthereumAddress()
   @Transform(({ value }) => value.toLowerCase())
   collateralTokenAddress: string;
@@ -87,7 +87,7 @@ export class GetLoanTermByCollateralTokenAddressParamDto {
   chainId: string;
 }
 
-export class GetLoanTermsByCollateralAddressesBodyDto {
+export class GetAdvanceTermsByCollateralAddressesBodyDto {
   @IsString()
   @Matches(/^\d+$/, { message: 'chainId must be a numeric string' })
   chainId: string;

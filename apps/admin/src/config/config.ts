@@ -1,4 +1,4 @@
-export const ENVIRONMENT = import.meta.env.VITE_ENVIRONMENT;
+export const ENVIRONMENT = (import.meta.env.VITE_ENVIRONMENT as string).toUpperCase()
 export const AUTH0_ISSUER = import.meta.env.VITE_AUTH0_ISSUER;
 export const AUTH0_AUDIENCE = import.meta.env.VITE_AUTH0_AUDIENCE;
 export const AUTH0_CLIENT_ID = import.meta.env.VITE_AUTH0_CLIENT_ID;
@@ -8,4 +8,4 @@ export const BASE_SUBGRAPH_URL = import.meta.env.VITE_BASE_SUBGRAPH_URL;
 export const POLYGON_RPC_URL = import.meta.env.VITE_POLYGON_RPC_URL;
 export const POLYGON_SUBGRAPH_URL = import.meta.env.VITE_POLYGON_SUBGRAPH_URL;
 export const PROD_DOMAIN = import.meta.env.VITE_PROD_DOMAIN;
-export const STAGE_DOMAIN = import.meta.env.VITE_STAGE_DOMAIN;
+export const DEV_DOMAIN = import.meta.env.VITE_DEV_DOMAIN;

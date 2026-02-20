@@ -1,4 +1,4 @@
-name: "Deploy Admin Panel to prod"
+name: "Deploy Admin Panel to dev"
 
 on:
   workflow_dispatch:
@@ -11,6 +11,6 @@ jobs:
   deploy-admin:
     uses: ./.github/workflows/deploy-admin.yml
     with:
-      environment: 'prod'
+      environment: 'dev'
     secrets:
-      IAM_WORKFLOW_ROLE: ${{ secrets.PROD_IAM_WORKFLOW_ROLE }}
+      IAM_WORKFLOW_ROLE: ${{ secrets.DEV_IAM_WORKFLOW_ROLE }}
