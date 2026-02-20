@@ -4,7 +4,7 @@ STACK_NAME=advances-backend
 ARTIFACT_NAME=advances.zip
 TEMPLATE_FILE=template.yml
 
-.deploy:
+.deploy: advances.zip
 	sam deploy --template-file $(TEMPLATE_FILE) --stack-name $(ENVIRONMENT)-$(STACK_NAME) --capabilities $(CAPABILITIES) --region $(REGION) --s3-bucket $(ARTIFACTS_BUCKET) --s3-prefix $(ENVIRONMENT) --parameter-overrides $(PARAMETERS) --no-fail-on-empty-changeset
 
 deploy-dev: ENVIRONMENT=dev
