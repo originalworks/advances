@@ -1,4 +1,4 @@
-name: "Deploy Admin Panel to dev"
+name: "Deploy Admin Panel to prod"
 
 on:
   workflow_dispatch:
