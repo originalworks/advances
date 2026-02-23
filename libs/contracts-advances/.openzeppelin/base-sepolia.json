@@ -1,0 +1,173 @@
+{
+  "manifestVersion": "3.2",
+  "proxies": [
+    {
+      "address": "0xcDb22fa41961F26b9812Eb14c1AdFC4F19B9c146",
+      "txHash": "0x0d32e8dd938bc4b134f726744c93a329804d17ba368fdbb03f12d6294ec6d51e",
+      "kind": "uups"
+    }
+  ],
+  "impls": {
+    "d381ba1689a3f1951e910d274832ec0ad0069703faed1fabb748a4fe1ae00b7c": {
+      "address": "0x20610656A81D37eC41d0E23FBfBC22f52849BE11",
+      "txHash": "0x61d7439f35316837a6be98c48b942d237a84eabc53ba03bb93002114d59e7662",
+      "layout": {
+        "solcVersion": "0.8.32",
+        "storage": [
+          {
+            "label": "paymentTokenAddress",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address",
+            "contract": "RoyaltyAdvanceFactory",
+            "src": "contracts/advances/RoyaltyAdvanceFactory.sol:66"
+          },
+          {
+            "label": "agreementFactoryAddress",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_address",
+            "contract": "RoyaltyAdvanceFactory",
+            "src": "contracts/advances/RoyaltyAdvanceFactory.sol:67"
+          },
+          {
+            "label": "offerDuration",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256",
+            "contract": "RoyaltyAdvanceFactory",
+            "src": "contracts/advances/RoyaltyAdvanceFactory.sol:68"
+          },
+          {
+            "label": "templateAddress",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_address",
+            "contract": "RoyaltyAdvanceFactory",
+            "src": "contracts/advances/RoyaltyAdvanceFactory.sol:69"
+          },
+          {
+            "label": "maxCollateralsPerAdvance",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256",
+            "contract": "RoyaltyAdvanceFactory",
+            "src": "contracts/advances/RoyaltyAdvanceFactory.sol:70"
+          },
+          {
+            "label": "__gap",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_array(t_uint256)50_storage",
+            "contract": "RoyaltyAdvanceFactory",
+            "src": "contracts/advances/RoyaltyAdvanceFactory.sol:72"
+          }
+        ],
+        "types": {
+          "t_address": {
+            "label": "address",
+            "numberOfBytes": "20"
+          },
+          "t_bool": {
+            "label": "bool",
+            "numberOfBytes": "1"
+          },
+          "t_struct(InitializableStorage)86_storage": {
+            "label": "struct Initializable.InitializableStorage",
+            "members": [
+              {
+                "label": "_initialized",
+                "type": "t_uint64",
+                "offset": 0,
+                "slot": "0"
+              },
+              {
+                "label": "_initializing",
+                "type": "t_bool",
+                "offset": 8,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(OwnableStorage)14_storage": {
+            "label": "struct OwnableUpgradeable.OwnableStorage",
+            "members": [
+              {
+                "label": "_owner",
+                "type": "t_address",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_struct(ReentrancyGuardStorage)477_storage": {
+            "label": "struct ReentrancyGuardUpgradeable.ReentrancyGuardStorage",
+            "members": [
+              {
+                "label": "_status",
+                "type": "t_uint256",
+                "offset": 0,
+                "slot": "0"
+              }
+            ],
+            "numberOfBytes": "32"
+          },
+          "t_uint256": {
+            "label": "uint256",
+            "numberOfBytes": "32"
+          },
+          "t_uint64": {
+            "label": "uint64",
+            "numberOfBytes": "8"
+          },
+          "t_array(t_uint256)50_storage": {
+            "label": "uint256[50]",
+            "numberOfBytes": "1600"
+          }
+        },
+        "namespaces": {
+          "erc7201:openzeppelin.storage.ReentrancyGuard": [
+            {
+              "contract": "ReentrancyGuardUpgradeable",
+              "label": "_status",
+              "type": "t_uint256",
+              "src": "@openzeppelin/contracts-upgradeable/utils/ReentrancyGuardUpgradeable.sol:43",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Ownable": [
+            {
+              "contract": "OwnableUpgradeable",
+              "label": "_owner",
+              "type": "t_address",
+              "src": "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol:24",
+              "offset": 0,
+              "slot": "0"
+            }
+          ],
+          "erc7201:openzeppelin.storage.Initializable": [
+            {
+              "contract": "Initializable",
+              "label": "_initialized",
+              "type": "t_uint64",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:69",
+              "offset": 0,
+              "slot": "0"
+            },
+            {
+              "contract": "Initializable",
+              "label": "_initializing",
+              "type": "t_bool",
+              "src": "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol:73",
+              "offset": 8,
+              "slot": "0"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
