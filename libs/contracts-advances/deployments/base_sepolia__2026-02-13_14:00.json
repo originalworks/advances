@@ -1,0 +1,7 @@
+{
+    "deployer": "0x68630b8C8e2B87c2b0c7A8E47398933578DF3407",
+    "royaltyAdvanceTemplate": "0x7eA1b3602f9A857CC849fAEacf9Eb0E00F2044cf",
+    "royaltyAdvanceFactory": "0xcDb22fa41961F26b9812Eb14c1AdFC4F19B9c146",
+    "agreementFactory": "0x27333d40af2C5a01eaa5Fd0b890181B9D525255d",
+    "paymentToken": "0x46Bc2338a282383fe2585Ef5F0171E62FdCEf3B0"
+}

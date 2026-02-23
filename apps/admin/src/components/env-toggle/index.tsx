@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { Box, Switch, Typography } from '@mui/material';
 
 import { Mode } from '../../contexts/color-mode';
-import { PROD_DOMAIN, STAGE_DOMAIN } from '../../config/config';
+import { PROD_DOMAIN, DEV_DOMAIN } from '../../config/config';
 
 const ENV_DOMAINS = {
   prod: PROD_DOMAIN,
-  stage: STAGE_DOMAIN,
+  dev: DEV_DOMAIN,
 };
 
 export const EnvironmentToggle: React.FC<{ mode: Mode }> = ({ mode }) => {
@@ -17,15 +17,15 @@ export const EnvironmentToggle: React.FC<{ mode: Mode }> = ({ mode }) => {
     const currentHost = window.location.hostname;
     if (currentHost === ENV_DOMAINS.prod) {
       setIsProd(true);
-    } else if (currentHost === ENV_DOMAINS.stage) {
+    } else if (currentHost === ENV_DOMAINS.dev) {
       setIsProd(false);
     }
   }, []);
 
   const handleToggle = () => {
     const targetUrl = isProd
-      ? window.location.href.replace(ENV_DOMAINS.prod, ENV_DOMAINS.stage)
-      : window.location.href.replace(ENV_DOMAINS.stage, ENV_DOMAINS.prod);
+      ? window.location.href.replace(ENV_DOMAINS.prod, ENV_DOMAINS.dev)
+      : window.location.href.replace(ENV_DOMAINS.dev, ENV_DOMAINS.prod);
 
     window.location.href = targetUrl;
   };
@@ -36,7 +36,7 @@ export const EnvironmentToggle: React.FC<{ mode: Mode }> = ({ mode }) => {
         variant="body2"
         color={!isProd ? 'textPrimary' : 'textSecondary'}
       >
-        Stage
+        Dev
       </Typography>
 
       <Switch

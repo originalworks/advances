@@ -2,11 +2,11 @@
   "Parameters": {
     "Environment": "prod",
     "AutoPublishAlias": "ProdAdvancesBackend",
-    "DBName": "prod-advances",
-    "DbHost": "/ow/stage/db/host",
-    "DbSecret": "/ow/stage/db/secret-arn",
-    "RootDbName": "/ow/stage/db/name",
-    "Auth0Issuer": "/ow/stage/auth0/issuer",
-    "Auth0Audience": "/ow/stage/auth0/audience"
+    "DBName": "advances",
+    "DbHost": "/ow/prod/db/host",
+    "DbSecret": "/ow/prod/db/secret-arn",
+    "RootDbName": "/ow/prod/db/name",
+    "Auth0Issuer": "/ow/prod/auth0/issuer",
+    "Auth0Audience": "/ow/prod/auth0/audience"
   }
 }

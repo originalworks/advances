@@ -1,8 +1,7 @@
-import { ethers } from 'ethers';
 import factory from 'factory-girl';
 import { DataSource } from 'typeorm';
-
 import { AdvanceTerm } from '../src/advanceTerms/advanceTerms.entity';
+import { ethers } from 'ethers';
 
 export type Factory = typeof factory;
 

@@ -14,8 +14,8 @@ import { Public } from '../auth/auth.decorator';
 import {
   CreateAdvanceTermsDto,
   UpdateAdvanceTermsDto,
-  GetAdvanceTermsByCollateralAddressesBodyDto,
   GetAdvanceTermByCollateralTokenAddressParamDto,
+  GetAdvanceTermsByCollateralAddressesBodyDto,
 } from './advanceTerms.dto';
 import { AdvanceTerm } from './advanceTerms.entity';
 import { AdvanceTermsService } from './advanceTerms.service';
