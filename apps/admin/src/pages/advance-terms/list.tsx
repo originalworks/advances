@@ -15,7 +15,7 @@ import { Autocomplete, Stack, TextField as InputField } from '@mui/material';
 
 import { CustomColumnMenu } from '../../components';
 
-export const LoanTermsList = () => {
+export const AdvanceTermsList = () => {
   const chains = useChains();
   const chainId = useChainId();
 
@@ -93,8 +93,8 @@ export const LoanTermsList = () => {
         description: '1% = 10000',
       },
       {
-        field: 'maxLoanAmount',
-        headerName: 'Max Loan Amount',
+        field: 'maxAdvanceAmount',
+        headerName: 'Max Advance Amount',
         type: 'number',
         minWidth: 200,
         display: 'flex',

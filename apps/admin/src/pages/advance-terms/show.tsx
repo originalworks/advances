@@ -8,7 +8,7 @@ import {
 import { useShow } from '@refinedev/core';
 import { Stack, Typography } from '@mui/material';
 
-export const LoanTermsShow = () => {
+export const AdvanceTermsShow = () => {
   const chains = useChains();
   const { query } = useShow({});
   const { data, isLoading } = query;
@@ -46,9 +46,9 @@ export const LoanTermsShow = () => {
         <TextField value={record?.feePercentagePpm} />
 
         <Typography variant="body1" fontWeight="bold">
-          Max Loan Amount
+          Max Advance Amount
         </Typography>
-        <TextField value={record?.maxLoanAmount} />
+        <TextField value={record?.maxAdvanceAmount} />
 
         <Typography variant="body1" fontWeight="bold">
           Ratio

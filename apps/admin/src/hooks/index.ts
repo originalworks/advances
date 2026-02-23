@@ -1,2 +1,2 @@
-export * from './useLoanOffers';
+export * from './useAdvanceOffers';
 export * from './useDataProvider';

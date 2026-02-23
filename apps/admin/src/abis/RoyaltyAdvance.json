@@ -6,12 +6,68 @@
   },
   {
     "inputs": [],
+    "name": "AdvanceAlreadyActive",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "AdvanceNotActive",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "AdvanceOfferExpired",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "AdvanceOfferRevoked",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "collateralIndex",
+        "type": "uint256"
+      }
+    ],
+    "name": "CollateralNotTransferred",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "FeePpmTooHigh",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "InvalidInitialization",
     "type": "error"
   },
   {
     "inputs": [],
+    "name": "NoCollateralsProvided",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NoPaymentTokenToProcess",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "NotInitializing",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "OnlyRecipientAllowed",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ReentrancyGuardReentrantCall",
     "type": "error"
   },
   {
@@ -24,6 +80,98 @@
     ],
     "name": "SafeERC20FailedOperation",
     "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ZeroAdvanceAmount",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "collateralIndex",
+        "type": "uint256"
+      }
+    ],
+    "name": "ZeroCollateralAmount",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ZeroCollateralReceiverAddress",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "collateralIndex",
+        "type": "uint256"
+      }
+    ],
+    "name": "ZeroCollateralTokenAddress",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ZeroDuration",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ZeroPaymentTokenAddress",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ZeroRecipientAddress",
+    "type": "error"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "repaymentAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "AdvancePartiallyRepaid",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "address",
+        "name": "advancer",
+        "type": "address"
+      }
+    ],
+    "name": "AdvanceProvided",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "repaymentAmount",
+        "type": "uint256"
+      }
+    ],
+    "name": "AdvanceRepaid",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [],
+    "name": "AdvanceRevoked",
+    "type": "event"
   },
   {
     "anonymous": false,
@@ -39,53 +187,34 @@
     "type": "event"
   },
   {
-    "anonymous": false,
-    "inputs": [
+    "inputs": [],
+    "name": "advanceAmount",
+    "outputs": [
       {
-        "indexed": false,
         "internalType": "uint256",
-        "name": "repaymentAmount",
+        "name": "",
         "type": "uint256"
       }
     ],
-    "name": "LoanPartialyRepaid",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "lender",
-        "type": "address"
-      }
-    ],
-    "name": "LoanProvided",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "repaymentAmount",
-        "type": "uint256"
-      }
-    ],
-    "name": "LoanRepaid",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [],
-    "name": "LoanRevoked",
-    "type": "event"
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [],
-    "name": "borrower",
+    "name": "advanceState",
+    "outputs": [
+      {
+        "internalType": "enum AdvanceState",
+        "name": "",
+        "type": "uint8"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "advancer",
     "outputs": [
       {
         "internalType": "address",
@@ -97,55 +226,11 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "collateralAmounts",
+    "inputs": [],
+    "name": "collateralReceiver",
     "outputs": [
       {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "collateralTokenIds",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "collateralTokens",
-    "outputs": [
-      {
-        "internalType": "contract IERC1155",
+        "internalType": "address",
         "name": "",
         "type": "address"
       }
@@ -209,19 +294,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "getRemainingTotalDue",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "components": [
@@ -252,7 +324,12 @@
       },
       {
         "internalType": "address",
-        "name": "_borrowerAddress",
+        "name": "_recipientAddress",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "_collateralReceiverAddress",
         "type": "address"
       },
       {
@@ -262,7 +339,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "_loanAmount",
+        "name": "_advanceAmount",
         "type": "uint256"
       },
       {
@@ -274,58 +351,6 @@
     "name": "initialize",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "lender",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "loanActive",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "loanAmount",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "loanOfferActive",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -428,9 +453,22 @@
   },
   {
     "inputs": [],
-    "name": "provideLoan",
+    "name": "provideAdvance",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "recipient",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -442,7 +480,7 @@
   },
   {
     "inputs": [],
-    "name": "revokeLoan",
+    "name": "revokeAdvance",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -461,6 +499,19 @@
         "internalType": "bool",
         "name": "",
         "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalDue",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",

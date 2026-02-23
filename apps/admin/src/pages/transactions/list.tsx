@@ -47,10 +47,10 @@ export const TransactionsList = () => {
       gqlVariables: {
         first: 1000,
         where: {
-          loanContract_: {
+          advanceContract_: {
             ...(contractAddresses.length > 0
               ? {
-                  loanContract_in: contractAddresses
+                  advanceContract_in: contractAddresses
                     .replace(/ /g, '')
                     .split(','),
                 }
@@ -81,10 +81,10 @@ export const TransactionsList = () => {
         first: pageSize,
         skip: page * pageSize,
         where: {
-          loanContract_: {
+          advanceContract_: {
             ...(contractAddresses.length > 0
               ? {
-                  loanContract_in: contractAddresses
+                  advanceContract_in: contractAddresses
                     .replace(/ /g, '')
                     .split(','),
                 }
@@ -132,7 +132,7 @@ export const TransactionsList = () => {
         },
       },
       {
-        field: 'loanContract__id',
+        field: 'advanceContract__id',
         headerName: 'Contract Address',
         type: 'string',
         minWidth: 350,
@@ -141,7 +141,7 @@ export const TransactionsList = () => {
         align: 'left',
         headerAlign: 'left',
         renderCell: function render({ row }) {
-          return <TextField value={row.loanContract.id} />;
+          return <TextField value={row.advanceContract.id} />;
         },
       },
       {
@@ -238,7 +238,7 @@ export const TransactionsList = () => {
         },
       },
       {
-        field: 'loanContract',
+        field: 'advanceContract',
         headerName: 'Actions',
         align: 'center',
         headerAlign: 'center',
@@ -261,8 +261,8 @@ export const TransactionsList = () => {
           sx={{ flex: 1, marginTop: 0 }}
           margin="normal"
           type="text"
-          label="Loan Contract Addresses"
-          name="loanContractAddress"
+          label="Advance Contract Addresses"
+          name="advanceContractAddress"
           onChange={(event) =>
             setContractAddresses(event.target.value.toLowerCase())
           }

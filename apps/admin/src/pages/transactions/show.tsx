@@ -56,7 +56,7 @@ export const TransactionShow = () => {
         <Typography variant="body1" fontWeight="bold">
           Contract Address
         </Typography>
-        <TextField value={record?.loanContract.id} />
+        <TextField value={record?.advanceContract.id} />
 
         <Typography variant="body1" fontWeight="bold">
           Collateral Tokens

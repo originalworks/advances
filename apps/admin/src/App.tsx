@@ -34,17 +34,17 @@ import {
   POLYGON_SUBGRAPH_URL,
 } from './config/config';
 import {
-  LoanTermEdit,
-  LoanTermsList,
-  LoanTermsShow,
-  LoanTermCreate,
-} from './pages/loan-terms';
+  AdvanceTermEdit,
+  AdvanceTermsList,
+  AdvanceTermsShow,
+  AdvanceTermCreate,
+} from './pages/advance-terms';
 import { Login } from './pages/login';
 import { Header } from './components';
 import { AppIcon } from './components/app-icon';
 import { ColorModeContextProvider } from './contexts/color-mode';
-import { LoanOfferShow, LoanOffersList } from './pages/loan-offers';
 import { TransactionShow, TransactionsList } from './pages/transactions';
+import { AdvanceOfferShow, AdvanceOffersList } from './pages/advance-offers';
 
 const gqlBaseClient = new Client({
   url: BASE_SUBGRAPH_URL,
@@ -164,19 +164,19 @@ function App() {
                 routerProvider={routerBindings}
                 resources={[
                   {
-                    name: 'loan-terms',
-                    list: '/loan-terms',
-                    create: '/loan-terms/create',
-                    edit: '/loan-terms/edit/:id',
-                    show: '/loan-terms/show/:id',
+                    name: 'advance-terms',
+                    list: '/advance-terms',
+                    create: '/advance-terms/create',
+                    edit: '/advance-terms/edit/:id',
+                    show: '/advance-terms/show/:id',
                     meta: {
                       canDelete: true,
                     },
                   },
                   {
-                    name: 'loan-offers',
-                    list: '/loan-offers',
-                    show: '/loan-offers/show/:id',
+                    name: 'advance-offers',
+                    list: '/advance-offers',
+                    show: '/advance-offers/show/:id',
                   },
                   {
                     name: 'transactions',
@@ -207,17 +207,17 @@ function App() {
                   >
                     <Route
                       index
-                      element={<NavigateToResource resource="loan-terms" />}
+                      element={<NavigateToResource resource="advance-terms" />}
                     />
-                    <Route path="/loan-terms">
-                      <Route index element={<LoanTermsList />} />
-                      <Route path="create" element={<LoanTermCreate />} />
-                      <Route path="edit/:id" element={<LoanTermEdit />} />
-                      <Route path="show/:id" element={<LoanTermsShow />} />
+                    <Route path="/advance-terms">
+                      <Route index element={<AdvanceTermsList />} />
+                      <Route path="create" element={<AdvanceTermCreate />} />
+                      <Route path="edit/:id" element={<AdvanceTermEdit />} />
+                      <Route path="show/:id" element={<AdvanceTermsShow />} />
                     </Route>
-                    <Route path="/loan-offers">
-                      <Route index element={<LoanOffersList />} />
-                      <Route path="show/:id" element={<LoanOfferShow />} />
+                    <Route path="/advance-offers">
+                      <Route index element={<AdvanceOffersList />} />
+                      <Route path="show/:id" element={<AdvanceOfferShow />} />
                     </Route>
                     <Route path="/transactions">
                       <Route index element={<TransactionsList />} />

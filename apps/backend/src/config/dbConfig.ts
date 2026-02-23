@@ -1,6 +1,7 @@
-import { DataSourceOptions } from 'typeorm';
-import { entities } from './entities';
 import path from 'path';
+import { DataSourceOptions } from 'typeorm';
+
+import { entities } from './entities';
 
 export type DbConfigs = 'db' | 'test' | 'local' | 'migration';
 
