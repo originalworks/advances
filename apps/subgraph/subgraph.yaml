@@ -7,8 +7,8 @@ dataSources:
     network: base-sepolia
     source:
       abi: RoyaltyAdvanceFactory
-      address: "0x7F089CB03A9Ad6e89F2a42A186059Dce29FC2360"
-      startBlock: 32038340
+      address: "0xcDb22fa41961F26b9812Eb14c1AdFC4F19B9c146"
+      startBlock: 38041660
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.9
@@ -34,7 +34,7 @@ dataSources:
     source:
       abi: ERC20
       address: "0x46Bc2338a282383fe2585Ef5F0171E62FdCEf3B0"
-      startBlock: 27756618
+      startBlock: 38041660
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.9
