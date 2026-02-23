@@ -23,8 +23,8 @@ import { useDataProvider, useAdvanceOffers } from '../../hooks';
 import { ConnectButton, CustomColumnMenu } from '../../components';
 // TODO: update when deployed new contracts and subgraphs
 import {
-  LoanContractCollateral,
-  LoanStatus,
+  AdvanceStatus,
+  AdvanceContractCollateral,
 } from '../../generated/graphql/schema.types';
 import { ADVANCE_OFFERS_LIST_QUERY, STATISTICS_QUERY } from '../queries';
 
@@ -78,9 +78,9 @@ export const AdvanceOffersList = () => {
     async function fetchData() {
       if (!dataGridProps.rows || dataGridProps.rows.length === 0) return;
       const contracts: Array<{
-        status: LoanStatus;
+        status: AdvanceStatus;
         contract: `0x${string}`;
-        collaterals: Array<LoanContractCollateral>;
+        collaterals: Array<AdvanceContractCollateral>;
         isExpired: boolean;
       }> = dataGridProps.rows.map((row) => ({
         status: row.status,
