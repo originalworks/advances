@@ -13,13 +13,13 @@ export const useDataProvider = (goBack = false) => {
   const chainId = useChainId();
 
   const [dataProvider, setDataProvider] = useState<string>(
-    ENVIRONMENT === 'PROD' && chainId === polygon.id
+    ENVIRONMENT === 'prod' && chainId === polygon.id
       ? 'graphQlPolygon'
       : 'graphQlBase',
   );
 
   const handleChangeDataProvider = (id: number) => {
-    if (ENVIRONMENT === 'PROD' && id === polygon.id)
+    if (ENVIRONMENT === 'prod' && id === polygon.id)
       setDataProvider('graphQlPolygon');
     else setDataProvider('graphQlBase');
   };
