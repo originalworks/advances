@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BASE_RPC_URL, ENVIRONMENT, POLYGON_RPC_URL } from './config/config';
 
 const config =
-  ENVIRONMENT === 'PROD'
+  ENVIRONMENT === 'prod'
     ? createConfig(
         getDefaultConfig({
           // Required App Info
